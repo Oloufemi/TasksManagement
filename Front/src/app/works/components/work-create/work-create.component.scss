@@ -1,0 +1,23 @@
+
+mat-form-field {
+  width: 80%;
+}
+
+.form-container {
+  margin-top: 5rem;
+}
+
+.actions-container {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions-container>:first-child {
+  width: 48%;
+  border: none;
+}
+
+.actions-container>:nth-child(2) {
+  width: 48%;
+}

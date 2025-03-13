@@ -1,0 +1,38 @@
+<div class="form-container">
+  <form [formGroup]="workForm">
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>specify contract ID</mat-label>
+        <input matInput placeholder="contract ID" formControlName="workContractID" >
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>work title</mat-label>
+        <input matInput placeholder="work title" formControlName="workTitle" >
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>work type</mat-label>
+        <input matInput placeholder="work type" formControlName="workType" >
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>work manager information</mat-label>
+        <input matInput placeholder="work manager" formControlName="workManager" >
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>work status</mat-label>
+        <input matInput placeholder="work status" formControlName="workStatus" >
+      </mat-form-field>
+    </p>
+    <div class="actions-container">
+      <button mat-stroked-button (click)="createWork(false)" >ANNULER</button>
+      <button mat-flat-button (click)="createWork(true)" [disabled]="!activateCreationButton">CREER</button>
+    </div>
+  </form>
+</div>

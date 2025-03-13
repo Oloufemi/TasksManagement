@@ -1,0 +1,77 @@
+.work-card {
+  display: flex;
+  width: 95%;
+  padding: 2rem 1rem;
+  background-color: white;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.work-card:hover {
+  transform: scale(1.01);
+}
+
+.work-card-icon {
+  width: 10%;
+}
+
+
+.work-card-infos {
+  width: 55%;
+  margin-left: 1rem;
+}
+
+.work-card-infos>p:first-child {
+  font-weight: 200;
+  margin-bottom: 0.25rem;
+  color: grey;
+}
+
+.work-card-infos>p:nth-child(2) {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.work-card-infos :nth-child(3) {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5rem;
+}
+
+.work-card-infos :nth-child(3)>:first-child {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  background-color: #343333;
+  border: none;
+}
+
+.work-card-infos :nth-child(3)>:nth-child(2) {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: grey;
+  background-color: aliceblue;
+  border: none;
+}
+
+.work-card-status {
+  width: 16%;
+  margin-left: 1rem;
+}
+
+.work-card-status>:first-child {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: orangered;
+  background-color: lightgoldenrodyellow;
+  border: none;
+}
+
+.work-card-call-to-actions {
+  width: 10%;
+  margin-left: 1rem;
+}
+
+.work-card-call-to-actions svg:hover{
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+<div class="app-content">
+  <div>
+    <div class="app-content-card-list">
+      <div class="app-content-header">
+        <div>
+          <p>Liste des demandes</p>
+          <p>Gérer les demandes</p>
+        </div>
+        <div>
+          <button (click)="displayCreationComponent()" ><span>+</span> Ajouter</button>
+        </div>
+      </div>
+      <ng-container *ngIf="worksList.length > 0">
+        <ng-container *ngFor="let work of worksList">
+          <app-work-card [work]="work" (workToUpdateContractID)="displayUpdateComponent($event)" (workToDeleteContractID)="deleteWork($event)" ></app-work-card>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="app-content-work-form" *ngIf="displayFormToModifyWork">
+      <app-work-update [work]="workToModify" (updatedWork)="executeWorkModification($event)" ></app-work-update>
+    </div>
+    <div class="app-content-work-form" *ngIf="displayFormToAddWork">
+      <app-work-create (addingWork)="addingWorkToList($event)" ></app-work-create>
+    </div>
+  </div>
+</div>

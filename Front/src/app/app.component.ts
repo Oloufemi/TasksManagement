@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   displayUpdateComponent(contractID: number) {
     if (contractID) {
       this.displayFormToModifyWork = true;
-      this.workToModify = {...this.worksList.filter((itemWork: Work) => itemWork.workContractID === contractID)[0]};
+      this.workToModify = {...this.worksList.filter((itemWork: Work):boolean => itemWork.workContractID === contractID)[0]};
     }
   }
 

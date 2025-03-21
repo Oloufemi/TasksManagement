@@ -26,6 +26,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+  /*
+  Display a work in an update component to let the user modifies it
+   */
   displayUpdateComponent(contractID: number) {
     if (contractID) {
       this.displayFormToModifyWork = true;
@@ -33,10 +36,17 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /**
+   * Display component to add a Work
+   */
   displayCreationComponent() {
     this.displayFormToAddWork = true;
   }
 
+  /**
+   * Update information on a Work object
+   * @param work
+   */
   executeWorkModification(work: Work): void {
     this.displayFormToModifyWork = false;
     if (work) {
@@ -49,6 +59,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /**
+   * Delete a specified Work object
+   * @param workToDeleteContractId
+   */
   deleteWork(workToDeleteContractId: number) {
     if (workToDeleteContractId) {
       this.workService.deleteWork(workToDeleteContractId).subscribe((result) => {
@@ -59,6 +73,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /**
+   * Retrieve a Work/task object and add it to the list
+   * @param workValue
+   */
   addingWorkToList(workValue:Work) {
     this.displayFormToAddWork = false;
     if(workValue){

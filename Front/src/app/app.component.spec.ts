@@ -90,4 +90,28 @@ describe('AppComponent', () => {
       });
     });
   });
+
+  describe('addingWorkToList', () => {
+    it('should add a task', () => {
+      app.displayFormToAddWork = true;
+      app.worksList = [];
+      app.workService.addWork = jest.fn().mockReturnValue(of({}));
+      app.addingWorkToList({...workMock});
+      expect(app.displayFormToAddWork).toBeFalsy();
+      expect(app.workService.addWork).toHaveBeenCalled();
+      expect(app.worksList).toEqual([{...workMock}]);
+    });
+  });
+
+  describe('executeWorkModification', () => {
+    it('should modify a task', () => {
+      app.displayFormToModifyWork = true;
+      app.worksList = [{...workMock}];
+      app.workService.updateAWork = jest.fn().mockReturnValue(of({}));
+      app.executeWorkModification({...workMock,workManager:'alex'});
+      expect(app.displayFormToModifyWork).toBeFalsy();
+      expect(app.workService.updateAWork).toHaveBeenCalled();
+      expect(app.worksList[0]).toEqual({...workMock,workManager:'alex'});
+    });
+  });
 });

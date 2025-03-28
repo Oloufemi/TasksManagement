@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Work } from '../../models/work';
 
 @Component({
@@ -7,18 +7,21 @@ import { Work } from '../../models/work';
   styleUrl: './work-card.component.scss',
   standalone:false
 })
-export class WorkCardComponent implements OnInit{
+export class WorkCardComponent {
   @Input() work: Work | null = null;
   @Output() workToUpdateContractID:EventEmitter<number> = new EventEmitter<number>();
   @Output() workToDeleteContractID:EventEmitter<number> = new EventEmitter<number>();
 
-  ngOnInit(): void {
-  }
-
+  /**
+   * Emit the ID of task the user want to update
+   */
   updateWork() {
     this.workToUpdateContractID.emit(this.work?.workContractID);
   }
 
+  /**
+   * Emit the ID of task the user want to update
+   */
   deleteItem(){
     this.workToDeleteContractID.emit(this.work?.workContractID);
   }

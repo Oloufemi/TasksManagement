@@ -30,6 +30,10 @@ export class WorkCreateComponent implements OnInit {
     });
   }
 
+  /**
+   * Retrieve information to create a specific task
+   * @param create
+   */
   createWork(create:boolean){
     if (create){
       this.addingWork.emit(

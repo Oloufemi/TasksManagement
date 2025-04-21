@@ -54,6 +54,10 @@ ng e2e
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
+![Learning](https://plurisacademy.com/media/k2/items/cache/787ae9ec9023a82f5aa7e4c1a64f73cb_XL.jpg)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### DOM TESTING WITH HARNESSES
+* [Menu](https://github.com/angular/components/blob/main/src/material/menu/testing/menu-harness.spec.ts)
+
+### MARKDOWN
+[CommonMark](https://commonmark.org/help/)

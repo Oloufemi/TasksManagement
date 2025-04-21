@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { WorkCardComponent } from './work-card.component';
 import {Work} from '../../models/work';
-import {By} from '@angular/platform-browser';
 import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {MatIconButton} from '@angular/material/button';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {MatIcon} from '@angular/material/icon';
+import {getDebugElementByDataRole} from '../../core/functions';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {MatMenuHarness} from '@angular/material/menu/testing';
 
-export function getDebugElementByDataRole(fixture:ComponentFixture<any>, dataRole:string):DebugElement {
-  return fixture.debugElement.query(By.css(`[data-role="${dataRole}"]`));
-}
 describe('WorkCardComponent', () => {
   let component: WorkCardComponent;
   let fixture: ComponentFixture<WorkCardComponent>;
+  let loader: HarnessLoader;
   const workMock: Work = {
     workContractID: 123456789,
     workManager: "John ADEKAMBI",
@@ -36,6 +37,7 @@ describe('WorkCardComponent', () => {
     fixture = TestBed.createComponent(WorkCardComponent);
     component = fixture.componentInstance;
     component.work = {...workMock};
+    loader = TestbedHarnessEnvironment.loader(fixture);
     fixture.detectChanges();
   });
 
@@ -55,18 +57,33 @@ describe('WorkCardComponent', () => {
   });
 
   describe('updateWork', () => {
-    it('should emit the ID', () => {
-      component.workToUpdateContractID.emit = jest.fn().mockReturnValue(workMock.workContractID);
+    it('should emit the ID in case of update', () => {
+      component.workToUpdateContractID.emit = jest.fn();
+      component.workToDeleteContractID.emit = jest.fn();
       component.updateWork();
+      expect(component.workToUpdateContractID.emit).toHaveBeenCalled();
+      expect(component.workToDeleteContractID.emit).not.toHaveBeenCalled();
+    });
+    it('should emit the ID after a user click', async () => {
+      component.workToUpdateContractID.emit = jest.fn();
+      let menuList:MatMenuHarness[] = await loader.getAllHarnesses(MatMenuHarness);
+      let menu:MatMenuHarness = await menuList[0];
+      expect(await menu.isOpen()).toBeFalsy();
+      await menu.open();
+      expect(await menu.isOpen()).toBeTruthy();
+      await menu.clickItem({text: /Modifier/});
       expect(component.workToUpdateContractID.emit).toHaveBeenCalled();
     });
   });
 
   describe('deleteItem', () => {
-    it('should emit the ID', () => {
+    it('should emit the ID ', () => {
       component.workToDeleteContractID.emit = jest.fn().mockReturnValue(workMock.workContractID);
       component.deleteItem();
       expect(component.workToDeleteContractID.emit).toHaveBeenCalled();
     });
+    /*it('should emit the ID on the click on button', () => {
+
+    });*/
   });
 });

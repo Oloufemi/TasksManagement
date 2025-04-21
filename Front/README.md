@@ -56,8 +56,11 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 ![Learning](https://plurisacademy.com/media/k2/items/cache/787ae9ec9023a82f5aa7e4c1a64f73cb_XL.jpg)
 
+### FROM Jasmine&Karma to JEST
+* [Configuration link](https://www.npmjs.com/package/@briebug/jest-schematic/v/2.0.0)
+
 ### DOM TESTING WITH HARNESSES
 * [Menu](https://github.com/angular/components/blob/main/src/material/menu/testing/menu-harness.spec.ts)
 
 ### MARKDOWN
-[CommonMark](https://commonmark.org/help/)
+* [CommonMark](https://commonmark.org/help/)

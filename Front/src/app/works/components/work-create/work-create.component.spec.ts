@@ -9,17 +9,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInput, MatInputModule} from '@angular/material/input';
 import {DebugElement} from '@angular/core';
 import {getDebugElementByDataRole} from '../../core/functions';
+import {workMock} from '../../core/mocks';
 
 describe('WorkCreateComponent', () => {
   let component: WorkCreateComponent;
   let fixture: ComponentFixture<WorkCreateComponent>;
-  const workMock: Work = {
-    workContractID: 123456789,
-    workManager: "John ADEKAMBI",
-    workStatus: "En cours",
-    workTitle: "Projet de rénovation de biens",
-    workType: "Travaux"
-  };
   let inputWorkContractID:DebugElement;
   let inputWorkTitle:DebugElement;
   let inputWorkType:DebugElement;
@@ -64,7 +58,7 @@ describe('WorkCreateComponent', () => {
     fixture.detectChanges();
   });
 
-  fdescribe('Initialization', () => {
+  describe('Initialization', () => {
     it('should create component', () => {
       expect(component).toBeTruthy();
       expect(workTypeControl.value).toEqual('');
@@ -92,16 +86,6 @@ describe('WorkCreateComponent', () => {
       expect(inputWorkManager.nativeElement.value).toEqual("John Doe");
       expect(inputWorkStatus.nativeElement.value).toEqual("En cours");
     });
-    fit('should change form controls value on changing input value', fakeAsync(() => {
-      workContractIDControl.valueChanges.subscribe((value) => {
-        console.log(value);
-      });
-      inputWorkContractID.nativeElement.value = 97789886;
-      tick(500);
-      //fixture.detectChanges();
-      //console.log(inputWorkContractID.nativeElement.value);
-      //expect(component.workForm.controls['workContractID'].value).toEqual(97789886);
-    }));
   })
 
     describe('ngOnInit', () => {

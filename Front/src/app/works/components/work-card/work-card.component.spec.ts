@@ -41,7 +41,7 @@ describe('WorkCardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the component', () => {
+  it('should create the component and initialize values', () => {
     const workTitle:DebugElement = getDebugElementByDataRole(fixture,'work-title');
     const workType:DebugElement = getDebugElementByDataRole(fixture,'work-type');
     const workManager:DebugElement = getDebugElementByDataRole(fixture,'work-manager');
@@ -64,7 +64,7 @@ describe('WorkCardComponent', () => {
       expect(component.workToUpdateContractID.emit).toHaveBeenCalled();
       expect(component.workToDeleteContractID.emit).not.toHaveBeenCalled();
     });
-    it('should emit the ID after a user click', async () => {
+    it('should emit the ID after a user click on update button', async () => {
       component.workToUpdateContractID.emit = jest.fn();
       let menuList:MatMenuHarness[] = await loader.getAllHarnesses(MatMenuHarness);
       let menu:MatMenuHarness = await menuList[0];
@@ -74,6 +74,17 @@ describe('WorkCardComponent', () => {
       await menu.clickItem({text: /Modifier/});
       expect(component.workToUpdateContractID.emit).toHaveBeenCalled();
     });
+
+    it('should emit the ID after a user click on delete button', async () => {
+      component.workToDeleteContractID.emit = jest.fn();
+      let menuList:MatMenuHarness[] = await loader.getAllHarnesses(MatMenuHarness);
+      let menu:MatMenuHarness = await menuList[0];
+      expect(await menu.isOpen()).toBeFalsy();
+      await menu.open();
+      expect(await menu.isOpen()).toBeTruthy();
+      await menu.clickItem({text: /Supprimer/});
+      expect(component.workToDeleteContractID.emit).toHaveBeenCalled();
+    });
   });
 
   describe('deleteItem', () => {
@@ -82,8 +93,5 @@ describe('WorkCardComponent', () => {
       component.deleteItem();
       expect(component.workToDeleteContractID.emit).toHaveBeenCalled();
     });
-    /*it('should emit the ID on the click on button', () => {
-
-    });*/
   });
 });

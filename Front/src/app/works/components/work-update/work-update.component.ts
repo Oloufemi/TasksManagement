@@ -25,7 +25,6 @@ export class WorkUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.work);
     if (this.work) {
       this.workForm.controls['workContractID'].setValue(this.work.workContractID);
       this.workForm.controls['workStatus'].setValue(this.work.workStatus);

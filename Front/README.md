@@ -66,6 +66,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ### SERVICES TESTING
 * [HTTP_TESTING](https://angular.dev/guide/http/testing)
 * [HTTP_TESTING_OLD_WAY](https://gurindernarang.medium.com/complete-guide-to-test-angular-service-having-a-dependency-over-httpclient-rest-api-c2fe9ede4ab3)
+* [TEST_OBSERVABLE](https://angular.fr/unit-tests/subject)
 
 ### MARKDOWN
 * [CommonMark](https://commonmark.org/help/)

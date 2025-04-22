@@ -61,6 +61,11 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 ### DOM TESTING WITH HARNESSES
 * [Menu](https://github.com/angular/components/blob/main/src/material/menu/testing/menu-harness.spec.ts)
+* [Tutoriel](https://blog.angulartraining.com/how-to-use-angular-material-harnesses-to-improve-your-component-tests-7fe6359f67ce)
+
+### SERVICES TESTING
+* [HTTP_TESTING](https://angular.dev/guide/http/testing)
+* [HTTP_TESTING_OLD_WAY](https://gurindernarang.medium.com/complete-guide-to-test-angular-service-having-a-dependency-over-httpclient-rest-api-c2fe9ede4ab3)
 
 ### MARKDOWN
 * [CommonMark](https://commonmark.org/help/)

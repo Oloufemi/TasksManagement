@@ -28,7 +28,7 @@ describe('AppComponent', () => {
 
   it('should create the app and initialize values', () => {
     expect(app).toBeTruthy();
-    expect(app.worksList).toEqual([]);
+    expect(app.worksList()).toEqual([]);
     expect(app.displayFormToAddWork).toEqual(false);
     expect(app.displayFormToModifyWork).toEqual(false);
     expect(app.workToModify).toEqual(undefined);
@@ -47,7 +47,7 @@ describe('AppComponent', () => {
       app.workService.getAllWorks().subscribe((result: Work[]) => {
         expect(result).toEqual([{...workMock}]);
       });
-      expect(app.worksList).toEqual([{...workMock}]);
+      expect(app.worksList()).toEqual([{...workMock}]);
     });
   });
 
@@ -55,11 +55,11 @@ describe('AppComponent', () => {
     it('should not make changes', () => {
       app.displayUpdateComponent(0);
       expect(app.displayFormToModifyWork).toBeFalsy();
-      expect(app.worksList).toEqual([]);
+      expect(app.worksList()).toEqual([]);
     });
 
     it('should make changes', () => {
-      app.worksList = [{...workMock,workContractID:1},{...workMock,workContractID:2}];
+      app.worksList.set([{...workMock,workContractID:1},{...workMock,workContractID:2}]);
       app.displayUpdateComponent(1);
       expect(app.displayFormToModifyWork).toBeTruthy();
       expect(app.workToModify).toEqual({...workMock,workContractID:1});
@@ -83,10 +83,10 @@ describe('AppComponent', () => {
 
     it('should delete work', () => {
       app.workService.deleteWork = jest.fn().mockReturnValue(of({}));
-      app.worksList = [{...workMock,workContractID:1},{...workMock,workContractID:2}];
+      app.worksList.set([{...workMock,workContractID:1},{...workMock,workContractID:2}])
       app.deleteWork(1);
       app.workService.deleteWork(1).subscribe(() => {
-      expect(app.worksList).toEqual([{...workMock,workContractID:2}]);
+      expect(app.worksList()).toEqual([{...workMock,workContractID:2}]);
       });
     });
   });
@@ -94,24 +94,24 @@ describe('AppComponent', () => {
   describe('addingWorkToList', () => {
     it('should add a task', () => {
       app.displayFormToAddWork = true;
-      app.worksList = [];
+      app.worksList.set([]);
       app.workService.addWork = jest.fn().mockReturnValue(of({}));
       app.addingWorkToList({...workMock});
       expect(app.displayFormToAddWork).toBeFalsy();
       expect(app.workService.addWork).toHaveBeenCalled();
-      expect(app.worksList).toEqual([{...workMock}]);
+      expect(app.worksList()).toEqual([{...workMock}]);
     });
   });
 
   describe('executeWorkModification', () => {
     it('should modify a task', () => {
       app.displayFormToModifyWork = true;
-      app.worksList = [{...workMock}];
+      app.worksList.set([{...workMock}]);
       app.workService.updateAWork = jest.fn().mockReturnValue(of({}));
       app.executeWorkModification({...workMock,workManager:'alex'});
       expect(app.displayFormToModifyWork).toBeFalsy();
       expect(app.workService.updateAWork).toHaveBeenCalled();
-      expect(app.worksList[0]).toEqual({...workMock,workManager:'alex'});
+      expect(app.worksList()[0]).toEqual({...workMock,workManager:'alex'});
     });
   });
 });

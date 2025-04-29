@@ -10,17 +10,23 @@
           <button (click)="displayCreationComponent()" ><span>+</span> Ajouter</button>
         </div>
       </div>
-      <ng-container *ngIf="worksList.length > 0">
-        <ng-container *ngFor="let work of worksList">
-          <app-work-card [work]="work" (workToUpdateContractID)="displayUpdateComponent($event)" (workToDeleteContractID)="deleteWork($event)" ></app-work-card>
-        </ng-container>
-      </ng-container>
+            @for (work of worksList(); track work.workContractID) {
+            <app-work-card [work]="work" (workToUpdateContractID)="displayUpdateComponent($event)" (workToDeleteContractID)="deleteWork($event)" ></app-work-card>
+          }
+            @empty {
+            <p>Aucune tâche n'est enrégistrée</p>
+        }
     </div>
-    <div class="app-content-work-form" *ngIf="displayFormToModifyWork">
+    @if (displayFormToModifyWork) {
+    <div class="app-content-work-form">
       <app-work-update [work]="workToModify" (updatedWork)="executeWorkModification($event)" ></app-work-update>
     </div>
-    <div class="app-content-work-form" *ngIf="displayFormToAddWork">
-      <app-work-create (addingWork)="addingWorkToList($event)" ></app-work-create>
-    </div>
+    }
+
+    @if (displayFormToAddWork) {
+    <div class="app-content-work-form">
+       <app-work-create (addingWork)="addingWorkToList($event)" ></app-work-create>
+     </div>
+    }
   </div>
 </div>

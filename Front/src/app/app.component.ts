@@ -1,28 +1,27 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {WorksModule} from './works/works.module';
 import {WorksService} from './works/works.service';
-import {NgForOf, NgIf} from '@angular/common';
 import {Work} from './works/models/work';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [WorksModule, NgForOf, NgIf],
+  imports: [WorksModule],
   providers: [WorksService],
   standalone: true
 })
 export class AppComponent implements OnInit {
   title = 'front';
   workService = inject(WorksService);
-  worksList: Work[] = [];
+  worksList:WritableSignal<Work[]> = signal<Work[]>([]);
   displayFormToModifyWork = false;
   displayFormToAddWork = false;
   workToModify: Work;
 
   ngOnInit() {
-    this.workService.getAllWorks().subscribe((result: Work[]) => {
-      this.worksList = [...result];
+    this.workService.getAllWorks().subscribe((tasks:Work[]) => {
+      this.worksList.set(tasks);
     });
   }
 
@@ -32,7 +31,7 @@ export class AppComponent implements OnInit {
   displayUpdateComponent(contractID: number) {
     if (contractID) {
       this.displayFormToModifyWork = true;
-      this.workToModify = {...this.worksList.filter((itemWork: Work):boolean => itemWork.workContractID === contractID)[0]};
+      this.workToModify = {...this.worksList().filter((itemWork: Work):boolean => itemWork.workContractID === contractID)[0]};
     }
   }
 
@@ -52,8 +51,8 @@ export class AppComponent implements OnInit {
     if (work) {
       this.workService.updateAWork(work).subscribe((result:any) => {
         if(!result.error){
-          const index = this.worksList.findIndex((itemWork: Work) => itemWork.workContractID === work.workContractID);
-          this.worksList[index] = {...work};
+          const index = this.worksList().findIndex((itemWork: Work) => itemWork.workContractID === work.workContractID);
+          this.worksList()[index] = {...work};
         }
       });
     }
@@ -67,7 +66,7 @@ export class AppComponent implements OnInit {
     if (workToDeleteContractId) {
       this.workService.deleteWork(workToDeleteContractId).subscribe((result) => {
         if(!result.error) {
-          this.worksList = [...this.worksList.filter((itemWork: Work) => itemWork.workContractID !== workToDeleteContractId)];
+          this.worksList.set([...this.worksList().filter((itemWork: Work) => itemWork.workContractID !== workToDeleteContractId)]);
         }
       });
     }
@@ -82,7 +81,7 @@ export class AppComponent implements OnInit {
     if(workValue){
       this.workService.addWork(workValue).subscribe((result) => {
         if(!result.error){
-          this.worksList.push({...workValue});
+          this.worksList().push({...workValue});
         }
       });
     }

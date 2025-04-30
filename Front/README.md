@@ -70,3 +70,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 ### MARKDOWN
 * [CommonMark](https://commonmark.org/help/)
+
+### SHINY FUNCTIONS
+* [SIGNALS_Input_Output](https://blog.angular-university.io/angular-signal-components/)
+* [Flow_Control](https://angular.fr/template-syntax/control-flow)

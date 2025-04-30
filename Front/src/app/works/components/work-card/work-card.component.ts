@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, InputSignal, Output} from '@angular/core';
+import {Component, input, InputSignal, output, OutputEmitterRef} from '@angular/core';
 import { Work } from '../../models/work';
 
 @Component({
@@ -9,8 +9,8 @@ import { Work } from '../../models/work';
 })
 export class WorkCardComponent {
   work:InputSignal<Work> = input.required<Work>({alias:'workInput'});
-  @Output() workToUpdateContractID:EventEmitter<number> = new EventEmitter<number>();
-  @Output() workToDeleteContractID:EventEmitter<number> = new EventEmitter<number>();
+  workToUpdateContractID:OutputEmitterRef<number> = output<number>();
+  workToDeleteContractID:OutputEmitterRef<number> = output<number>();
 
   /**
    * Emit the ID of task the user want to update

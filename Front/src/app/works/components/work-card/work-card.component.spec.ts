@@ -36,7 +36,7 @@ describe('WorkCardComponent', () => {
 
     fixture = TestBed.createComponent(WorkCardComponent);
     component = fixture.componentInstance;
-    component.work = {...workMock};
+    fixture.componentRef.setInput('workInput', {...workMock});
     loader = TestbedHarnessEnvironment.loader(fixture);
     fixture.detectChanges();
   });
@@ -53,7 +53,7 @@ describe('WorkCardComponent', () => {
     expect(workManager.nativeElement.textContent).toEqual(workMock.workManager);
     expect(workStatus.nativeElement.textContent).toEqual(workMock.workStatus);
     expect(workContract.nativeElement.textContent).toEqual(workMock.workContractID.toString());
-    expect(component.work).toEqual({...workMock});
+    expect(component.work()).toEqual({...workMock});
   });
 
   describe('updateWork', () => {

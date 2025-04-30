@@ -1,4 +1,4 @@
-<div *ngIf="work">
+<div *ngIf="work()">
   <div class="work-card">
     <div class="work-card-icon">
       <p>
@@ -12,15 +12,15 @@
       </p>
     </div>
     <div class="work-card-infos">
-      <p data-role="work-title" >{{ work.workTitle }}</p>
-      <p data-role="work-type" >{{ work.workType }}</p>
+      <p data-role="work-title" >{{ work().workTitle }}</p>
+      <p data-role="work-type" >{{ work().workType }}</p>
       <div>
-        <p data-role="work-manager" >{{ work.workManager }}</p>
-        <p data-role="work-contractID" >{{ work.workContractID }}</p>
+        <p data-role="work-manager" >{{ work().workManager }}</p>
+        <p data-role="work-contractID" >{{ work().workContractID }}</p>
       </div>
     </div>
     <div class="work-card-status">
-      <p data-role="work-status" >{{ work.workStatus }}</p>
+      <p data-role="work-status" >{{ work().workStatus }}</p>
     </div>
     <div class="work-card-call-to-actions">
       <p>

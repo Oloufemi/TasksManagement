@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit, output, OutputEmitterRef} from '@angular/core';
 import {Work} from '../../models/work';
 import {WorkForm} from '../../models/work-form';
 import {FormControl, FormControlStatus, FormGroup, Validators} from '@angular/forms';
@@ -11,7 +11,7 @@ import {FormControl, FormControlStatus, FormGroup, Validators} from '@angular/fo
 })
 export class WorkCreateComponent implements OnInit {
   workForm: FormGroup<WorkForm>;
-  @Output() addingWork: EventEmitter<Work> = new EventEmitter<Work>();
+  addingWork:OutputEmitterRef<Work|undefined> = output<Work|undefined>();
   activateCreationButton = false;
 
   constructor() {

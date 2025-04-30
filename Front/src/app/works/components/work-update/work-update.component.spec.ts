@@ -30,6 +30,7 @@ describe('WorkUpdateComponent', () => {
     fixture = TestBed.createComponent(WorkUpdateComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
+    fixture.componentRef.setInput('work',undefined);
     workManagerControl = component.workForm.controls['workManager'];
     workContractIDControl = component.workForm.controls['workContractID'];
     workStatusControl = component.workForm.controls['workStatus'];
@@ -64,7 +65,7 @@ describe('WorkUpdateComponent', () => {
     });
 
     it('should update form group controls values', () => {
-      component.work = {...workMock};
+      fixture.componentRef.setInput('work',{...workMock});
       component.ngOnInit();
       expect(workContractIDControl.value).toBe(123456789);
       expect(workTypeControl.value).toEqual('Travaux');
@@ -90,7 +91,7 @@ describe('WorkUpdateComponent', () => {
       expect(component.updatedWork.emit).toHaveBeenCalledWith({...workMock});
     });
     it('should emit a value after a user click on update button', async () => {
-      component.work = {...workMock};
+      fixture.componentRef.setInput('work',{...workMock});
       component.ngOnInit();
       component.updatedWork.emit = jest.fn();
       const matButtonList:MatButtonHarness[] = await loader.getAllHarnesses(MatButtonHarness);
@@ -99,7 +100,7 @@ describe('WorkUpdateComponent', () => {
       expect(component.updatedWork.emit).toHaveBeenCalledWith({...workMock});
     });
     it('should emit undefined after a user click on cancel button', async () => {
-      component.work = {...workMock};
+      fixture.componentRef.setInput('work',{...workMock});
       component.ngOnInit();
       component.updatedWork.emit = jest.fn();
       const matButtonList:MatButtonHarness[] = await loader.getAllHarnesses(MatButtonHarness);

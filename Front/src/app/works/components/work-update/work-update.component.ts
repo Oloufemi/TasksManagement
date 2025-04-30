@@ -1,4 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  input,
+  InputSignal,
+  OnInit,
+  output,
+  OutputEmitterRef
+} from '@angular/core';
 import {Work} from '../../models/work';
 import {WorkForm} from '../../models/work-form';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -10,9 +17,9 @@ import {FormControl, FormGroup} from '@angular/forms';
   standalone: false
 })
 export class WorkUpdateComponent implements OnInit {
-  @Input() work: Work;
+  work:InputSignal<Work> = input.required<Work>();
   workForm: FormGroup<WorkForm>;
-  @Output() updatedWork: EventEmitter<Work> = new EventEmitter<Work>();
+  updatedWork:OutputEmitterRef<Work|undefined>  = output<Work|undefined>();
 
   constructor() {
     this.workForm = new FormGroup<WorkForm>({
@@ -25,12 +32,12 @@ export class WorkUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.work) {
-      this.workForm.controls['workContractID'].setValue(this.work.workContractID);
-      this.workForm.controls['workStatus'].setValue(this.work.workStatus);
-      this.workForm.controls['workManager'].setValue(this.work.workManager);
-      this.workForm.controls['workType'].setValue(this.work.workType);
-      this.workForm.controls['workTitle'].setValue(this.work.workTitle);
+    if (this.work()) {
+      this.workForm.controls['workContractID'].setValue(this.work().workContractID);
+      this.workForm.controls['workStatus'].setValue(this.work().workStatus);
+      this.workForm.controls['workManager'].setValue(this.work().workManager);
+      this.workForm.controls['workType'].setValue(this.work().workType);
+      this.workForm.controls['workTitle'].setValue(this.work().workTitle);
     }
   }
 
